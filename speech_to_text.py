@@ -1,6 +1,7 @@
 import pyfirmata
 import time
 import speech_recognition as sr
+import pokemon
 
 board = pyfirmata.Arduino("/dev/cu.usbmodem14201")
 
@@ -18,6 +19,7 @@ with sr.Microphone() as source:
     audio = r.listen(source)
     try:
         text = r.recognize_google(audio)
-        print("you said : {}".format(text))
+        entry = pokemon.pokedex[text]
+        # TODO: print entry.name and entry.desc to LCD module
     except:
         print("voice not recognized")
